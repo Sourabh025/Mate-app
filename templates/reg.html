@@ -209,10 +209,10 @@ button.social-signin.google {
     {% csrf_token %}
     {% load crispy_forms_tags %}
 
-    {{form.email|as_crispy_field}}  
-    {{form.username|as_crispy_field}}
-    {{form.password1|as_crispy_field}}
-    {{form.password2|as_crispy_field}}
+    {{form.email}}  
+    {{form.username}}
+    {{form.password1}}
+    {{form.password2}}
     
 
     <button type="submit">Sign up</button>

@@ -4,37 +4,55 @@ from django.contrib.auth import login,authenticate
 
 from django.urls import reverse_lazy
 
+from django.contrib.auth.forms import UserCreationForm
+
 from django.http import HttpResponseRedirect
 
 from django.contrib.auth.mixins import LoginRequiredMixin   #--- this mixins required to check if user is logged in or not---
-
 
 from django.contrib import messages
 
 from .forms import ProfileForm,UserForm  #--- import feilds from forms.py to used in templates forms---
 
 from django.contrib.auth.models import  User
-from .forms import reg
+
+from post.models import Post
+
+from .forms import reg 
+
 from userprofile.models import profile  #--- importing from userprofile app model to here---
+
 from django.views.generic import TemplateView, CreateView
 
 # Create your views here.
 
 def registration(request):
     print("check1")
+    form=UserCreationForm() # user creation form should be intialised empty in the begining otherwise signup will not work
     if request.method=="POST":
-        form=reg(request.POST)
+        form=UserCreationForm(request.POST)
+        print("inside request")
         if form.is_valid():
+            print("getting form")
             form.save()
-        return  redirect('login')
+            username=form.cleaned_data.get('username')
+            raw_password=form.cleaned_data.get('password1')
+            user=authenticate(username=username,password=raw_password)
+            print("Signup successfull")
+            return  redirect('login')
     else:
-        form=reg()
+        print("Form not saved")
+        form=UserCreationForm()
+        print(User.objects.all())  #printing all the users from auth table 
+        print(User.objects.filter(username="user"))
+        x=User.objects.first()
+        print(x.id)
     return render(request,"reg.html",{"form": form})
 
 #profile functionality starts from here
 
 class ProfileView(LoginRequiredMixin, TemplateView):  #this will render profile of user onlyif user is loggedin 
-    template_name='Profile.html'
+    template_name='profile.html'
 
 #if user is logged in then this class render profile_update form if he wants to edit his/her profile 
 class ProfileUpdateView(LoginRequiredMixin,TemplateView):
@@ -50,11 +68,13 @@ class ProfileUpdateView(LoginRequiredMixin,TemplateView):
         user_form = UserForm(post_data, instance=request.user)  #storing userform data which is entered by user for user model 
         profile_form = ProfileForm(post_data, file_data, instance=request.user.profile)  #loading profile_form with all data to profile model
 
+        #UserForm and ProfileForm are two different models defined in model.py
+
         if profile_form.is_valid() and user_form.is_valid():
-            user_form.save()
-            profile_form.save()
+            user_form.save()  #render user_form
+            profile_form.save() #render profileform
             messages.success(request, 'Your profile successfully updated!')
-            return render(request,'Profile.html')#after submit button user will be redirected to his newly updated profile
+            return render(request,'profile.html')#after submit button user will be redirected to his newly updated profile
         #context will always run 
         else:
             messages.success(request,'sorry some error occured')
@@ -67,4 +87,3 @@ class ProfileUpdateView(LoginRequiredMixin,TemplateView):
 
     def get(self, request, *args, **kwargs):        #get method will run when user request is get 
         return self.post(request, *args, **kwargs)
-

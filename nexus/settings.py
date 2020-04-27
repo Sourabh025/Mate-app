@@ -12,8 +12,6 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 """
 
-
-
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -44,6 +42,7 @@ INSTALLED_APPS = [
     'register',
     'home',
 	'userprofile',
+    'post',
     'crispy_forms',
 
     
@@ -85,10 +84,14 @@ WSGI_APPLICATION = 'nexus.wsgi.application'
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 DATABASES = {
-     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+     'default': { 
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'mate_dev',  #schema name is mate_dev
+		'USER': 'root',
+		'PASSWORD':'aa44bd80sr',
+		'HOST': 'localhost',
+		'PORT': '3306',
+		}
 }
 
 
@@ -148,7 +151,7 @@ STATIC_ROOT=    os.path.join(BASE_DIR, 'boot'), #bootstrap
 
 
 LOGIN_REDIRECT_URL="/home/"
-#always use ' /url/ '
+
 LOGOUT_REDIRECT_URL="/"
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
