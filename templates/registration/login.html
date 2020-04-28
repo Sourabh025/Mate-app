@@ -1,17 +1,16 @@
-{% extends "home.html" %}
+{% extends "Base.html" %}
 {% block title %}
 Login Here
 {% endblock %}
 
-
-
+{%load staticfiles%}
 {% block content %}
 	
      <form action="" method="post" class="from-group">
 	<center>
 	{% csrf_token %}
-	{{form}}
-	<p>Don't have an accoount? Create one <a href="/">here</a></p>
+	{{form.as_p}}
+	
 	<button type="submit" class="btn btn-success">Login</button>	
 </center>   
  </form>

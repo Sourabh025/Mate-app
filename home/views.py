@@ -13,7 +13,7 @@ def home(request):
 
 		'posts':Post.objects.all()
 
-		#creating an object of a Post model 
+		#creating an object of a Post model named posts
 
 	}
 

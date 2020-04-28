@@ -6,14 +6,13 @@ from django.contrib.auth.forms import UserCreationForm
 from django import forms
 from userprofile.models import profile  # import profile model from userprofile
 
-#extending UserCreationForm 
+#extending UserCreationForm  
 
 class reg(UserCreationForm):
     first_name=forms.CharField()
     last_name=forms.CharField()
     email=forms.EmailField()
-    
-
+    # adding extra fields to the UserCreationForm 
 
     #constructor used to remove help text from the signup page
     def __init__(self, *args, **kwargs):
@@ -63,12 +62,13 @@ class UserForm(forms.ModelForm):
 
 #extending profile model
 #creating a form for the profile edit 
+
 class ProfileForm(forms.ModelForm):
     class Meta:
+
         # note here model name is profile that we had defined in our userprofile app
         # insimple words profile is a table inside our database
-        # if we change the name profile to pr or other it will cause error beacause model always takes table name
-        
+
         model=profile
 
         #fields take list of fields that we need in our form 

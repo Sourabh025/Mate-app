@@ -27,19 +27,29 @@ from userprofile import views as p
 
 from register import views as pr
 
+from post.views import PostView,PostDetailView,PostCreateView,PostUpdateView,PostDeleteView
+
 from post import views as post
 
-
 urlpatterns = [
+
     path('admin/', admin.site.urls),
     path('',v.registration,name ='register'),
     #path('',v.registration,name='register1'),
-    path('home/',post.home,name='home'),
+    # path('home/',post.home,name='home'),
+    path('home/',PostView.as_view(),name='post-create'),
+    path('post/<int:pk>/',PostDetailView.as_view(),name="post-detail"),
+    path('post/new/',PostCreateView.as_view(),name="post-form"),
+    path('post/<int:pk>/update/',PostUpdateView.as_view(),name="post-update"),
+    path('post/<int:pk>/delete/',PostDeleteView.as_view(),name="post-delete"),
     #path('profile/',pr.ProfileUpdateView,name='profile'),  # wrong way to import class this will genrate an error because we are importing class as a function
     path('',include("django.contrib.auth.urls")),
     path('profile_update/', pr.ProfileUpdateView.as_view(), name='phome'), #always import class based view as it. other wise it will give error that one extra argument given
     path('profile/', pr.ProfileView.as_view(), name='prhome'),
-    path('homefeed/',post.home,name='post'),   
+    path('homefeed/',post.home,name='post'),  
+
+
+
 ]
 
 

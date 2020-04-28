@@ -50,7 +50,7 @@ def registration(request):
     return render(request,"reg.html",{"form": form})
 
 #profile functionality starts from here
-
+# we can also use function for below class but with @Login_required decorator instead of LoginRequiredMixin
 class ProfileView(LoginRequiredMixin, TemplateView):  #this will render profile of user onlyif user is loggedin 
     template_name='profile.html'
 
@@ -68,7 +68,7 @@ class ProfileUpdateView(LoginRequiredMixin,TemplateView):
         user_form = UserForm(post_data, instance=request.user)  #storing userform data which is entered by user for user model 
         profile_form = ProfileForm(post_data, file_data, instance=request.user.profile)  #loading profile_form with all data to profile model
 
-        #UserForm and ProfileForm are two different models defined in model.py
+        #UserForm and ProfileForm are two different froms defined in forms.py
 
         if profile_form.is_valid() and user_form.is_valid():
             user_form.save()  #render user_form
@@ -77,13 +77,14 @@ class ProfileUpdateView(LoginRequiredMixin,TemplateView):
             return render(request,'profile.html')#after submit button user will be redirected to his newly updated profile
         #context will always run 
         else:
-            messages.success(request,'sorry some error occured')
-        context = self.get_context_data(
-                                        user_form=user_form,           #context will be used when we use variable in html file {form.as_p}
-                                        profile_form=profile_form
-                                    )
+            messages.error(request,'sorry some error occured')
+        
+        # context = self.get_context_data(
+        #                                 user_form=user_form,           #context will be used when we use variable in html file {form.as_p}
+        #                                 profile_form=profile_form
+        #                             )
 
-        return self.render_to_response(context)
+        # return self.render_to_response(context)
 
-    def get(self, request, *args, **kwargs):        #get method will run when user request is get 
-        return self.post(request, *args, **kwargs)
+    # def get(self, request, *args, **kwargs):        #get method will run when user request is get 
+    #     return self.post(request, *args, **kwargs)

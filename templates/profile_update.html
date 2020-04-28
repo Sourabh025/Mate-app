@@ -9,6 +9,7 @@
 {% block content %}
 	
   <form method="POST" enctype="multipart/form-data">
+  	<!-- note: enctype is used to save an image when uploaded by a user  otherwise image will not be saved -->
   
   {% csrf_token %}
 

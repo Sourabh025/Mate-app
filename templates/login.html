@@ -1,4 +1,5 @@
-{% extends "home.html"%}
+{% extends "Base.html"%}
+
 {% block title %}
 Login Here
 {% endblock %}
@@ -11,7 +12,7 @@ Login Here
 	<center>
 	{% csrf_token %}
 	{{form}}
-	<p>Don't have an accoount?  <a href="">here</a></p>
+	
 	<button type="submit" class="btn btn-success">Login</button>	
 </center>   
  </form>
