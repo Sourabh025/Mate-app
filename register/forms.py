@@ -43,8 +43,6 @@ class UserForm(forms.ModelForm):
         fields=[
 
             'username',
-            'first_name',
-            'last_name',
             'email',    
             
       
@@ -54,8 +52,6 @@ class UserForm(forms.ModelForm):
         help_texts={
 
             'username' : "enter name",
-            'first_name' : "enter first name",
-            'last_name': "enter last name ",
             'email':"enter your email",
             
         }

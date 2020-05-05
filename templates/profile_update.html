@@ -1,5 +1,8 @@
 
-{% extends 'home.html' %}
+{% extends 'Base.html' %}
+
+
+{% load crispy_forms_tags %}
 
 <style type="text/css"></style>>
 
@@ -14,7 +17,8 @@
   {% csrf_token %}
 
   <!--here i am using user_form and profile_form because these two are different classes in models-->
-   {% load crispy_forms_tags %}
+  
+  
 
    {{ user_form|crispy }} <!--user_form is a variable returned(rendered from register views with profile_update.html(this) template)-->
 

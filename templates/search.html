@@ -1,0 +1,32 @@
+{% extends 'Base.html'%}
+
+{%block content%}
+
+<form  method="POST" action="/search/">
+	{% csrf_token %}
+  <input name="srh" type="text" value="{{request.GET.q}}" placeholder="Search...">
+  <button type="submit">Search</button>
+</form>
+
+	{% for users in sr %}
+
+        <article class="media content-section">
+        	<div>
+            <h2><a class="article-title" href="#">{{users.username}}</a></h2>
+            <!-- here post detail is a name of class based url  -->
+            <!-- <p class="article-content">{{ post.content }}</p> -->
+          </div>
+        </article>
+
+    {% endfor %}
+
+<!-- 
+<ul>
+  {% for users in sr %}
+    <li>
+      {{ users.username }}
+    </li>
+  {% endfor %}
+</ul>
+ -->
+{% endblock %}

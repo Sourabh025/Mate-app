@@ -1,13 +1,18 @@
+<!-- note login is always defined inside a app_name/template ,it is automatically routed-->
+
 {% extends "Base.html" %}
+
 {% block title %}
 Login Here
 {% endblock %}
 
 {%load staticfiles%}
+
 {% block content %}
 	
-     <form action="" method="post" class="from-group">
+    <form action="" method="post" class="from-group">
 	<center>
+
 	{% csrf_token %}
 	{{form.as_p}}
 	

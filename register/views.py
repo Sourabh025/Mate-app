@@ -47,7 +47,7 @@ def registration(request):
         print(User.objects.filter(username="user"))
         x=User.objects.first()
         print(x.id)
-    return render(request,"reg.html",{"form": form})
+    return render(request,"register.html",{"form": form})
 
 #profile functionality starts from here
 # we can also use function for below class but with @Login_required decorator instead of LoginRequiredMixin
@@ -63,28 +63,33 @@ class ProfileUpdateView(LoginRequiredMixin,TemplateView):
     #this post method will work if user enter submit button with some data in profile_update template form and save and authenticate data
     def post(self, request):
 
-        post_data = request.POST  #storing post request  data that is entered by a user
-        file_data= request.FILES  # storing file in this case file is image
+        post_data = request.POST or None #storing post request  data that is entered by a user
+        file_data= request.FILES  or None # storing file in this case file is image
         user_form = UserForm(post_data, instance=request.user)  #storing userform data which is entered by user for user model 
         profile_form = ProfileForm(post_data, file_data, instance=request.user.profile)  #loading profile_form with all data to profile model
 
         #UserForm and ProfileForm are two different froms defined in forms.py
-
+        print("Next check for validation")
         if profile_form.is_valid() and user_form.is_valid():
-            user_form.save()  #render user_form
-            profile_form.save() #render profileform
+            user_form.save()  #save user_form
+            profile_form.save() #save profileform
+            print("form saved")
             messages.success(request, 'Your profile successfully updated!')
             return render(request,'profile.html')#after submit button user will be redirected to his newly updated profile
-        #context will always run 
+        
         else:
             messages.error(request,'sorry some error occured')
-        
-        # context = self.get_context_data(
-        #                                 user_form=user_form,           #context will be used when we use variable in html file {form.as_p}
-        #                                 profile_form=profile_form
-        #                             )
+        #context return dictonary of forms to the template profile_update    
+        context = self.get_context_data(
+                                        user_form=user_form,           #context will be used when we use variable in html file {form.as_p}
+                                        profile_form=profile_form
+                                    )
 
-        # return self.render_to_response(context)
+        return self.render_to_response(context)
 
-    # def get(self, request, *args, **kwargs):        #get method will run when user request is get 
-    #     return self.post(request, *args, **kwargs)
+
+    #get method will run post method without validation of user data
+    def get(self, request, *args, **kwargs):        #get method will run when user request is get 
+        return self.post(request, *args, **kwargs)
+
+    #both get and post methods will run only if user is logged in

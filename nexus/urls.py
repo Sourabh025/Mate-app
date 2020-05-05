@@ -31,6 +31,8 @@ from post.views import PostView,PostDetailView,PostCreateView,PostUpdateView,Pos
 
 from post import views as post
 
+from search import views as s
+
 urlpatterns = [
 
     path('admin/', admin.site.urls),
@@ -47,7 +49,8 @@ urlpatterns = [
     path('profile_update/', pr.ProfileUpdateView.as_view(), name='phome'), #always import class based view as it. other wise it will give error that one extra argument given
     path('profile/', pr.ProfileView.as_view(), name='prhome'),
     path('homefeed/',post.home,name='post'),  
-
+    # path('search/',s.search.as_view(),name='search'),
+    path('search/',s.search,name='search'),
 
 
 ]

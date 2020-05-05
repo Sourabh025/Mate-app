@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'home',
 	'userprofile',
     'post',
+    'search',
     'crispy_forms',
 
     
