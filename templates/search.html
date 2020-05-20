@@ -1,0 +1,40 @@
+{% extends 'Base.html'%}
+
+{%block content%}
+
+
+<article class='search'>
+<form  method="POST" action="/search/">
+	{% csrf_token %}
+  <input name="srh" type="text" value="{{request.GET.q}}" placeholder="Search...">
+  <button class="btn btn-outline-info" type="submit">Search</button>
+</form>
+</article>
+	{% for profile in sr %}
+
+        <article class="media content-section">
+        	<div>
+            <a class="mr-2" href="#">User</a>
+            <h2><a class="article-title" href="{% url 'profile_with_key' profile.id %}">{{profile.username}} </a></h2>
+           
+           
+          </div>
+        </article>
+
+  {% endfor %}
+
+  {% for post in sr1 %}
+
+        <article class="media content-section">
+          <div>
+            <a class="mr-2" href="#">Post</a>
+            <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{post.title}} </a></h2>
+           
+           
+          </div>
+        </article>
+
+
+    {% endfor %}
+
+{% endblock %}

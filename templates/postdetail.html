@@ -1,0 +1,72 @@
+{% extends "Base.html" %}
+
+{% block content %}
+
+<style type="text/css">
+  
+
+.btndiv{
+
+margin-top: 10px;
+
+}
+
+
+</style>
+  <article class="media content-section">
+    <img class="rounded-circle article-img" src="{{ post.author.profile.profile_image.url }}">
+    <div class="media-body">
+      <div class="article-metadata">
+        <a class="mr-2" href="{%url 'profile_with_key' user.id %}">{{ object.author }}</a>
+        <small class="text-muted">{{ object.dateposted|date:"F d, Y" }}</small>
+
+        {% if object.author == user %}
+          <div>
+            <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'post-update' object.id %}">Update</a>
+            <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-delete' object.id %}">Delete</a>
+          </div>
+        {% endif %}
+      </div>
+      <h2 class="article-title">{{ object.title }}</h2>
+
+      <p class="article-content">{{ object.content }}</p>
+<!-- 
+      <h4 class="article-title">Description : </h4> -->
+
+    <!--   <p class ="article-content">{{object.description}} </p> -->
+
+      
+      <img src="{{object.image.url}}" class="rounded float-center" height="300px" width="500px">
+
+      {% if object.author != user %}
+      
+      <div class='btndiv'>
+     <button  onclick="share()" >Share</button>
+     
+<!-- 
+     <input id="room-name-submit" type="button" value="Enter"> -->
+
+    <script>
+          function share(){
+
+            // window.location.pathname = '/chat/' + 'room/';
+            window.location = '/chat/' + 'room/';
+          }
+
+    </script>
+
+
+
+      </div>
+
+      <div class="questions">
+
+        
+
+      </div>
+
+      {% endif %}
+
+    </div>
+  </article>
+{% endblock content %}

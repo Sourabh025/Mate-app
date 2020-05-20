@@ -1,0 +1,55 @@
+{% extends "Base.html" %}
+
+<style type="text/css">
+  
+
+.btndiv{
+
+margin-top: 10px;
+
+}
+
+
+</style>
+
+
+
+
+<body>
+
+
+{% block content %}
+
+<!-- itterating over a posts table -->
+
+    {% for post in posts %} 
+
+        <article class="media content-section">
+          <img class ="rounded-circle article-img" src="{{post.author.profile.profile_image.url}}">
+          <!-- src order ="post in posts .author/user name.name of field of the model profile and url to get address of image over local host from media directory" -->
+          <div class="media-body">
+            <div class="article-metadata">
+              <a class="mr-2" href="#">{{ post.author}}</a>
+              <small class="text-muted">{{ post.dateposted|date:"F d, Y" }}</small>
+    
+            </div>
+    
+            <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{post.title }}</a></h2>
+            <!-- here post detail is a name of class based url  -->
+            <p class="article-content">{{ post.content }}</p>
+            
+             <img src="{{post.image.url}}" class="rounded float-center" height="300px" width="500px">
+<!-- 
+             <div class='btndiv'>
+             <button class="btn btn-outline-info" type="submit">Share</button>
+             <button class="btn btn-outline-info" type="submit">Buy</button>
+             </div>
+
+ -->          </div>
+        </article>
+
+    {% endfor %}
+{% endblock content %}
+
+</body>
+<html>
