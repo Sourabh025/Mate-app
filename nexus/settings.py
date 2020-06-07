@@ -41,14 +41,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'register',
     'home',
-	'userprofile',
+    'userprofile',
     'post',
     'search',
     'crispy_forms',
     'chat',
     'channels', 
-    'widget_tweaks',
-    'django_private_chat',
+#     'django_private_chat',
 ]
 
 
