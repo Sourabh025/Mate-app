@@ -3,7 +3,25 @@
 {% block content %}
 
 <style type="text/css">
-  
+
+
+@font-face {
+   font-family: myFirstFont;
+   src: url(sansation_light.woff);
+}
+
+.article-des{
+   font-family: myFirstFont;
+   bottom: -100 px;
+   color: blue;
+}
+
+
+/*
+.article-des{
+
+  color:black;
+}*/
 
 .btndiv{
 
@@ -27,21 +45,27 @@ margin-top: 10px;
           </div>
         {% endif %}
       </div>
+
       <h2 class="article-title">{{ object.title }}</h2>
 
       <p class="article-content">{{ object.content }}</p>
+      <!-- description -->
+      <p class="article-des">DESCRIPTION :</p>
+      <p class="article-content">{{ object.description }}</p>
+      
+      
 <!-- 
       <h4 class="article-title">Description : </h4> -->
 
     <!--   <p class ="article-content">{{object.description}} </p> -->
 
-      
-      <img src="{{object.image.url}}" class="rounded float-center" height="300px" width="500px">
-
+    <div> 
+          <img src="{{post.image.url}}" style='width:100%;' display:block; height=auto; >
+    </div>
       {% if object.author != user %}
       
       <div class='btndiv'>
-     <button  onclick="share()" >Share</button>
+     <button  class="btn btn-outline-info" onclick="share()" >Share</button>
      
 <!-- 
      <input id="room-name-submit" type="button" value="Enter"> -->

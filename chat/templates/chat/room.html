@@ -44,7 +44,16 @@
       </div>
       <div id="contacts">
         <ul>
-          
+        <Contact  
+        name="user1"
+        picURL=""
+        chatURL="/user" />
+        
+        <Contact  
+        name="user2"
+        picURL=""
+        chatURL="/user" />
+
         </ul>
       </div>
       <div id="bottom-bar">
@@ -53,7 +62,7 @@
     <div class="content">
       <div class="contact-profile">
         <img src="{{user.profile.profile_image.url}}" alt="" />
-        <p>{{ username }}</p>
+        <p>{{ user.username }}</p>
         <div class="social-media">
           <i class="fa fa-facebook" aria-hidden="true"></i>
           <i class="fa fa-twitter" aria-hidden="true"></i>

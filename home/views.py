@@ -9,6 +9,7 @@ from post.models import Post
 
 def home(request):
 	# passing dictionary
+	print("Path of window is ",request.path)
 	context={
 
 		'posts':Post.objects.all()
@@ -21,5 +22,5 @@ def home(request):
 
 
 # def home(request):
-   
+
 #         return render(request,"new.html")

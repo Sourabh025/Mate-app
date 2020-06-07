@@ -1,4 +1,5 @@
 {% extends "Base.html" %}
+
 {% load static %}
 
 {% load crispy_forms_tags %} 
@@ -71,8 +72,10 @@ margin-top: 15px;
             <!-- here post detail is a name of class based url  -->
             <p class="article-content">{{ post.content }}</p>
             
-             <img src="{{post.image.url}}" class="rounded float-center" height="300px" width="500px">
-<!-- 
+
+            <img src="{{post.image.url}}" style='max-width:100%;' display:block; height=auto; >
+            <!-- to make image responsive use style and border  -->
+<!--
              <div class='btndiv'>
              <button class="btn btn-outline-info" type="submit">Share</button>
              <button class="btn btn-outline-info" type="submit">Buy</button>
