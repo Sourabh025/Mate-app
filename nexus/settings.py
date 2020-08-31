@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'chat',
     'channels', 
-#     'django_private_chat',
+    'django_private_chat',
 ]
 
 
@@ -74,7 +74,7 @@ ROOT_URLCONF = 'nexus.urls'
 ASGI_APPLICATION = "nexus.routing.application"  #after this we no longer using WSGI 
 
 # channel layer can communicate with Redis now.
-# adding redis support to the channel
+# # adding redis support to the channel
 CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
